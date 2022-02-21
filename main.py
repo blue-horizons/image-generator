@@ -44,7 +44,7 @@ while count <= 999:
 
     background = f"""<!-- Background -->
     <path d="M -40 -40 L 40 -40 L 40 40 L -40 40 Z"
-    fill="{backgroundColour} stroke="Black" stroke-width="0px"/>"""
+    fill="{backgroundColour}" stroke="Black" stroke-width="0px"/>"""
     
     svgOut = svgOut + background
 
