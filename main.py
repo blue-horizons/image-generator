@@ -44,7 +44,7 @@ while count <= 999:
 
     background = f"""<!-- Background -->
     <path d="M -40 -40 L 40 -40 L 40 40 L -40 40 Z"
-        fill="{backgroundColour} />"""
+    fill="{backgroundColour} stroke="Black" stroke-width="0px"/>"""
     
     svgOut = svgOut + background
 
@@ -64,7 +64,7 @@ while count <= 999:
     body = f"""
     <!-- Body -->
     <path d="M 19 55 L -1 55 L -1 87 L 27 87 L 27 63 L 23 63 C 21 63 19 61 19 59 Z" 
-    fill="#{furColour}" stroke="black" stroke-width="0.5" />"""
+    fill="{furColour}" stroke="black" stroke-width="0.5" />"""
 
     svgOut = svgOut + body
 
