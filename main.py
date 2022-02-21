@@ -63,7 +63,7 @@ while count <= 999:
 
     body = f"""
     <!-- Body -->
-    <path d="M 19 55 L -1 55 L -1 87 L 27 87 L 27 63 L 23 63 C 21 63 19 61 19 59 Z" 
+    <path d=" M -16 -25 L -13 -34 L -10 -25 Z M -25 5 L -41 5 L -41 42 L -15 42 L -15 25 L -20 25 C -23 25 -25 23 -25 20 Z" 
     fill="{furColour}" stroke="black" stroke-width="0.5" />"""
 
     svgOut = svgOut + body
@@ -75,9 +75,7 @@ while count <= 999:
     if randomiser % 2 == 0:
         spots = f"""
         <!-- Spots -->
-    <path d="M 46 29 C 48 26 56 54 34 C 52 41 41 36 46 29 Z"
-    fill="{spotFill}" stroke="black"/>
-    <path d="M 19 44 C 22 40 37 53 30 63 L 23 63 C 21 63 19 61 19 59 Z" 
+    <path d="M -25 2 C -15 2 -5 18 -10 25 L -20 25 C -23 25 -25 23 -25 20 M 3 -25 C -5 -17 23 -8 17 -25 Z"
     fill="{spotFill}" stroke="black"/>"""
         svgOut = svgOut + spots
     else:
@@ -88,9 +86,7 @@ while count <= 999:
     if randomiser % 2 == 0:
         spots = f"""
     <!-- Spots -->
-    <path d="M 10 66 C 20 67 20 78 10 77 C 0 76 0 65 10 66 Z"
-    fill="{spotFill}" stroke="black"/>
-    <path d="M 4 55 C 0 62 15 63 14 55 Z" 
+    <path d="M -37 5 C -39 12 -31 28 -25 19 L -25 5 M -15 30 C -22 27 -37 34 -35 40 L -15 40 Z" 
     fill="{spotFill}" stroke="black"/>"""
         svgOut = svgOut + spots
     else:
@@ -101,10 +97,11 @@ while count <= 999:
 
     eyeColour = colourGen(None)
 
-    eyes = f"""<!-- Eyes -->
+    eyes = f"""
+    <!-- Eyes -->
     <!-- Whites -->
     <path d="M -13 -15 C -13 -18 -12 -21 -9 -21 C -6 -21 -5 -18 -5 -15 C -5 -12 -6 -9 -9 -9 C -12 -9 -13 -12 -13 -15 C -13 -18 -14 -21 -17 -21 C -20 -21 -21 -18 -21 -15 C -21 -12 -20 -9 -17 -9 C -14 -9 -13 -12 -13 -15 Z"
-        fill={eyeColour} stroke="black"/>
+        fill="{eyeColour}" stroke="black"/>
     <!-- Pupils -->
     <path d="M -18 -14 C -18 -15 -18 -17 -16 -17 C -14 -17 -14 -15 -14 -14 C -14 -13 -14 -11 -16 -11 C -18 -11 -18 -13 -18 -14 Z"
         fill="black" stroke="black"/>

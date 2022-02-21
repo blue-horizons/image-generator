@@ -8,10 +8,11 @@
     fill="rgb(189,118,172)" stroke="black" stroke-width="0.5" />
     <!-- Body -->
     <path d="M 19 55 L -1 55 L -1 87 L 27 87 L 27 63 L 23 63 C 21 63 19 61 19 59 Z" 
-    fill="rgb(189,118,172)" stroke="black" stroke-width="0.5" /><!-- Eyes -->
+    fill="rgb(189,118,172)" stroke="black" stroke-width="0.5" />
+    <!-- Eyes -->
     <!-- Whites -->
     <path d="M -13 -15 C -13 -18 -12 -21 -9 -21 C -6 -21 -5 -18 -5 -15 C -5 -12 -6 -9 -9 -9 C -12 -9 -13 -12 -13 -15 C -13 -18 -14 -21 -17 -21 C -20 -21 -21 -18 -21 -15 C -21 -12 -20 -9 -17 -9 C -14 -9 -13 -12 -13 -15 Z"
-        fill=rgb(77,175,156) stroke="black"/>
+        fill="rgb(77,175,156)" stroke="black"/>
     <!-- Pupils -->
     <path d="M -18 -14 C -18 -15 -18 -17 -16 -17 C -14 -17 -14 -15 -14 -14 C -14 -13 -14 -11 -16 -11 C -18 -11 -18 -13 -18 -14 Z"
         fill="black" stroke="black"/>
