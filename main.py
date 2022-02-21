@@ -43,7 +43,7 @@ while count <= 999:
     backgroundColour = colourGen(None)
 
     background = f"""<!-- Background -->
-    <path d="M -40 -40 L 40 -40 L 40 40 L -40 40 Z"
+    <path d="M 24 15 L 27 6 L 30 15 Z"
     fill="{backgroundColour}" stroke="Black" stroke-width="0px"/>"""
     
     svgOut = svgOut + background
@@ -54,7 +54,7 @@ while count <= 999:
 
     face = f"""
     <!-- Face -->
-    <path d="M -25 -25 L -21 -36 L -17 -25 L -13 -36 L -9 -25 L 21 -25 C 23 -25 25 -23 25 -21 L 25 -1 L -1 -1 C -2 -1 -3 0 -3 1 L -3 18 C -3 19 -2 20 -1 20 L 25 20 C 25 23 23 25 20 25 L -20 25 C -23 25 -25 23 -25 20 Z" 
+    <path d="M 15 15 L 19 4 L 23 15 L 27 4 L 31 15 L 61 15 C 63 15 65 17 65 19 L 65 39 L 39 39 C 38 39 37 40 37 41 L 37 58 C 37 59 38 60 39 60 L 65 60 C 65 63 63 65 60 65 L 20 65 C 17 65 15 63 15 60 Z M 0 0 L 80 0 L 80 80 L 0 80 Z M 16 15 L 19 6 L 22 15 Z" 
     fill="{furColour}" stroke="black" stroke-width="0.5" />"""
     
     svgOut = svgOut + face
@@ -63,7 +63,7 @@ while count <= 999:
 
     body = f"""
     <!-- Body -->
-    <path d=" M -16 -25 L -13 -34 L -10 -25 Z M -25 5 L -41 5 L -41 42 L -15 42 L -15 25 L -20 25 C -23 25 -25 23 -25 20 Z" 
+    <path d="M 24 15 L 27 6 L 30 15 Z M 15 45 L -1 45 L -1 82 L 25 82 L 25 65 L 20 65 C 17 65 15 63 15 60 Z" 
     fill="{furColour}" stroke="black" stroke-width="0.5" />"""
 
     svgOut = svgOut + body
@@ -75,7 +75,7 @@ while count <= 999:
     if randomiser % 2 == 0:
         spots = f"""
         <!-- Spots -->
-    <path d="M -25 2 C -15 2 -5 18 -10 25 L -20 25 C -23 25 -25 23 -25 20 M 3 -25 C -5 -17 23 -8 17 -25 Z"
+    <path d="M 15 42 C 25 42 35 58 30 65 L 20 65 C 17 65 15 63 15 60 M 43 15 C 35 23 63 32 57 15 Z"
     fill="{spotFill}" stroke="black"/>"""
         svgOut = svgOut + spots
     else:
@@ -86,7 +86,7 @@ while count <= 999:
     if randomiser % 2 == 0:
         spots = f"""
     <!-- Spots -->
-    <path d="M -37 5 C -39 12 -31 28 -25 19 L -25 5 M -15 30 C -22 27 -37 34 -35 40 L -15 40 Z" 
+    <path d="M 3 45 C 1 52 9 68 15 59 L 15 45 M 25 70 C 18 67 3 74 5 80 L 25 80 Z" 
     fill="{spotFill}" stroke="black"/>"""
         svgOut = svgOut + spots
     else:
