@@ -2,8 +2,9 @@
 import math
 import os
 import random
+import time
 
-from cairosvg import svg2png # CairoSvg - converts `.svg` to `.png` 
+from cairosvg import svg2png  # CairoSvg - converts `.svg` to `.png`
 
 #-- Makes directory `HAWSIES` if not exists --
 if os.path.isdir("HAWSIES"):
@@ -13,8 +14,8 @@ else:
     os.chdir("HAWSIES")
 count = 0
 
-
-
+#-- Timer start -- 
+start = time.time()
 
 #-- Main Program --
 while count <= 999:
@@ -123,3 +124,15 @@ while count <= 999:
     svg2png(bytestring=svgOut,write_to=filename)
     count += 1
 
+end = time.time()
+
+timer = end-start
+
+print(f"""
+===========================================
+
+Time Taken to make 1000 images:
+{round(timer, 4)} s
+---------------------------------
+Time taken per image:
+~ {round(timer/1000,4)} s""")
