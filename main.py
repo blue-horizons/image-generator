@@ -38,6 +38,7 @@ start = time.time()
 
 #-- Main Program --
 while count <= 999:
+    os.chdir("HAWSIES")
     subTimer = time.time()    
     formatNum =  '{:03}'.format(count) # Sets number
     filename = f"hawsie #{formatNum}.png" # Sets filename
@@ -77,7 +78,14 @@ while count <= 999:
     fill="{furColour}" stroke="black" stroke-width="{LINE_WEIGHT}" />"""
 
     svgOut = svgOut + body
+    
+    #-- Teeth --
 
+    teeth = f"""<!-- Teeth -->
+    <path d="M 1295 780 C 1295 825 1220 825 1220 780 C 1220 825 1145 825 1145 780 C 1145 825 1070 825 1070 780 C 1070 825 995 825 995 780 C 995 825 920 825 920 780 C 920 825 845 825 845 780 Z M 1295 1200 C 1295 1155 1220 1155 1220 1200 C 1220 1155 1135 1155 1135 1200 C 1135 1155 1060 1155 1060 1200 C 1060 1155 985 1155 985 1200 C 985 1155 910 1155 910 1200 C 910 1155 835 1155 835 1200 Z"
+    fill="white" stroke="black" stroke-width="{LINE_WEIGHT}"/>"""
+    
+    svgOut = svgOut + teeth
     #-- Ears --
 
     ears = f"""<!-- Ears -->
@@ -106,7 +114,7 @@ while count <= 999:
         spotsTrue = "YES"
         spots = f"""
     <!-- Spots -->
-    <path d="M 300 1100 L -20 1100 L -20 1620 L 540 1620 L 540 1300 L 400 1300 C 340 1300 300 1260 300 1200 Z" 
+    <path d="M 62 1100 C 183 1266 45 1342 0 1318 L 0 1100 Z M 103 1480 C 51 1394 255 1345 345 1435 C 410 1500 151 1551 103 1480 Z" 
     fill="{spotFill}" stroke="black" stroke-width="{LINE_WEIGHT}" />"""
         svgOut = svgOut + spots
     else:
@@ -128,6 +136,22 @@ while count <= 999:
         fill="black" stroke="black" stroke-width="{LINE_WEIGHT}"/>"""    
     
     svgOut = svgOut + eyes
+    
+    #-- Glasses --
+
+    glassesTrue = random.randint(0,100)
+
+    if glassesTrue in range(0,23):
+        glassesFill=random.randint(0,9)
+        
+        glassesColours = ["aliceblue","antiqueWhite","cadetblue","darkolivegreen","darkseagreen","darkslategrey","darkmagenta","darkred","goldenrod","hotpink"]
+        glassesFill = glassesColours[glassesFill]
+        glasses = f"""<!-- Glasses -->
+        <path d="M 295 400 L 715 400 L 715 520 C 715 620 540 620 540 530 C 540 640 365 620 365 520 L 365 420 L 295 420 L 295 420 L 295 400 M 385 420 L 385 520 C 385 600 530 610 530 510 L 530 420 Z M 550 420 C 550 450 550 480 550 510 C 550 610 695 610 695 510 L 695 420 Z"
+        fill="{glassesFill}" stroke="black" stroke-width="2"/>"""
+        print(glassesFill)
+        
+        svgOut = svgOut + glasses
 
     #-- File Writing + Finalising --
 
@@ -138,17 +162,18 @@ while count <= 999:
     subTimerEnd = time.time()
 
     with open("hawsieLog.txt", "a") as f:
+        os.chdir("..")
         f.write(f"""==================== {formatNum} ====================
         {date.today()}
         {filename} created at {subTimer}, writing finished {round(subTimerEnd - subTimer, 4)} s later at {time.time()}.
-        Spots?              {spotsTrue}
         SVG File:
         --------------------------------------
+
         {svgOut}
         
         """)
 
-    print(f"`{filename}` created in {round(subTimerEnd - subTimer, 4)} s")
+    #print(f"`{filename}` created in {round(subTimerEnd - subTimer, 4)} s")
 
 end = time.time()
 
