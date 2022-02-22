@@ -1,3 +1,4 @@
+number,furColour,spotColour,eyeColour,glassesTrue,glassesColour,dateMade,timeTaken
 000,rgb(193,175,140),rgb(38.75,29.75,18.5),rgb(98,181,163),True,darkmagenta,22-02-2022,1645561089.5201082
 001,rgb(65,72,117),rgb(46.5,49.75,21.0),rgb(110,81,193),False,None,22-02-2022,1645561089.6234403
 002,rgb(143,127,143),rgb(44.25,48.0,22.0),rgb(84,89,160),False,None,22-02-2022,1645561089.721854

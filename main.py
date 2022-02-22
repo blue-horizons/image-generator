@@ -9,7 +9,7 @@ from datetime import date, datetime
 
 import simple_chalk
 from cairosvg import svg2png  # CairoSvg - converts `.svg` to `.png`
-
+total_size = ""
 #-- Makes directory `HAWSIES` if not exists --
 if os.path.isdir("HAWSIES"):
     os.chdir("HAWSIES")
@@ -30,6 +30,7 @@ logTableData = ""
 #-- open log csv
 
 logcsv = open("log.csv","a")
+logcsv.seek(82)
 
 #-- Generate random colour --
 
@@ -205,7 +206,7 @@ while run:
 
         subTimerEnd = time.time()
 
-        logTableData += f"""{formatNum},{furColour},{spotsFill},{eyeColour},{bool(glassesTrue)},{glassesFill},{TODAY},{time.time()}\n"""
+        logTableData += f"""{formatNum},"{furColour}","{spotsFill}","{eyeColour}",{bool(glassesTrue)},{glassesFill},{TODAY},{time.time()}\n"""
 
         with open("hawsieLog.txt", "a") as f:
             os.chdir("..")
@@ -239,4 +240,6 @@ while run:
     {round(timer, 4)} s
     ---------------------------------
     Avg. time taken per image:
-    ~ {round(timer/1000,4)} s""")
+    ~ {round(timer/1000,4)} s
+    Total file size:
+    {total_size}""")
