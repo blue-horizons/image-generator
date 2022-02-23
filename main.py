@@ -208,9 +208,9 @@ while run:
 
         logTableData += f"""{formatNum},"{furColour}","{spotsFill}","{eyeColour}",{bool(glassesTrue)},{glassesFill},{TODAY},{time.time()}\n"""
 
-        with open("hawsieLog.txt", "a") as f:
+        """with open("hawsieLog.txt", "a") as f:
             os.chdir("..")
-            f.write(f"""==================== {formatNum} ====================
+            f.write(f""==================== {formatNum} ====================
             {TODAY}
             {filename} created at {subTimer}, writing finished {round(subTimerEnd - subTimer, 4)} s later at {time.time()}.
             SVG File:
@@ -218,8 +218,8 @@ while run:
 
             {svgOut}
             
-            """)
-            os.chdir("HAWSIES")
+            "")
+            os.chdir("HAWSIES")"""
 
         print(f"`{filename}.png` created in {round(subTimerEnd - subTimer, 4)} s")
 
