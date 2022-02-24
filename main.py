@@ -7,9 +7,11 @@ import sys
 import time
 from datetime import date, datetime
 
-import simple_chalk
 from cairosvg import svg2png  # CairoSvg - converts `.svg` to `.png`
-total_size = ""
+from simple_chalk import blue, green, yellow, black, red
+
+darkred = black.bgRed
+total_size = 0
 #-- Makes directory `HAWSIES` if not exists --
 if os.path.isdir("HAWSIES"):
     os.chdir("HAWSIES")
@@ -60,6 +62,9 @@ global debug
 run = input("Run program okay? y/N \n> ")
 if run.lower() == "y":
     run = True
+    print(f"Input the number of Hawsies you want.")
+    print(red("The more made, the longer it will take."))
+    numberCalled = int(input("\n> "))-1
     debug = False
 elif run.lower() == "n":
     time.sleep(10)
@@ -71,11 +76,11 @@ elif run.lower == "y -d":
 while run:  
     #-- Timer start -- 
     start = time.time()
-    while count <= 999:
+    while count <= numberCalled:
         subTimer = time.time()    
         formatNum =  '{:03}'.format(count) # Sets number
         filename = f"hawsie #{formatNum}" # Sets filename
-        print(f"Creating `{filename}`...") # Returns Filename
+        print(yellow(f"Creating `{filename}`...")) # Returns Filename
 
         #-- Set xml version/ encoding etc
         svgOut = f"""<?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -200,12 +205,17 @@ while run:
         svg2png(bytestring=svgOut,write_to=f"{filename}.png")
         count += 1
 
-        if not(debug == None or debug == False):
+        """if not(debug == None or debug == False):
             with open(f"{filename}.svg", "w") as g:
                 g.write(svgOut)
                 g.close()
-            print(f"`{filename}.svg` created also.")
-            total_size += os.path.getsize(f"{filename}.svg")
+            print(f"`{filename}.svg` created also.")"""
+        total_size = int(os.path.getsize(f"{filename}.png"))
+        if count == 1:
+            with open("hawsie_template.svg","w") as f:
+                f.write(svgOut)
+            svg2png(bytestring=svgOut,write_to="hawsie_template.png")
+
 
         subTimerEnd = time.time()
 
@@ -224,8 +234,8 @@ while run:
             "")
             os.chdir("HAWSIES")"""
 
-        print(f"`{filename}.png` created in {round(subTimerEnd - subTimer, 4)} s")
-
+        print(f"`{green(filename)}.png` created in {blue(round(subTimerEnd - subTimer, 4))} s")
+        
         
     """os.replace("/HAWSIES/hawsieLog.txt", f"hawsieLog_{TODAY}.txt")"""
     end = time.time()
@@ -234,15 +244,14 @@ while run:
 
     print(f"""
 
-    ===========================================
+=========================================
 
-    Time Taken to make {count} images:
-    {round(timer, 4)} s
-    ---------------------------------
-    Avg. time taken per image:
-    ~ {round(timer/1000,4)} s
-    Total file size:
-    {total_size}""")
+Time Taken to make {count} images: {blue(round(timer, 4))} s
+----------------------------------------
+Avg. time taken per image: ~ {blue(round(timer/1000,4))} s
+
+Total file size: {red(total_size)} bytes""")
     os.chdir("..")
     logcsv.write(logTableData + "\n")
+    print(darkred("log table written"))
     run = not(run)
