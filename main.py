@@ -30,7 +30,9 @@ logTableData = ""
 #-- open log csv
 
 logcsv = open("log.csv","a")
-logcsv.seek(82)
+logcsv.write(f"""Number,"Fur Colour","Spot Colour","Eye Colour",glassesTrue,Glasses Colour,Date Made,Time Made\n""")
+
+
 
 #-- Generate random colour --
 
@@ -64,6 +66,7 @@ elif run.lower() == "n":
     quit()
 elif run.lower == "y -d":
     debug = True
+    run = True
 
 while run:  
     #-- Timer start -- 
@@ -197,7 +200,7 @@ while run:
         svg2png(bytestring=svgOut,write_to=f"{filename}.png")
         count += 1
 
-        if debug:
+        if not(debug == None or debug == False):
             with open(f"{filename}.svg", "w") as g:
                 g.write(svgOut)
                 g.close()
@@ -224,10 +227,7 @@ while run:
         print(f"`{filename}.png` created in {round(subTimerEnd - subTimer, 4)} s")
 
         
-    logcsv.write(logTableData + "\n")
-
-    sys.stdout.write("]\n")
-    os.replace("/HAWSIES/hawsieLog.txt", f"hawsieLog_{TODAY}.txt")
+    """os.replace("/HAWSIES/hawsieLog.txt", f"hawsieLog_{TODAY}.txt")"""
     end = time.time()
 
     timer = end-start
@@ -243,3 +243,6 @@ while run:
     ~ {round(timer/1000,4)} s
     Total file size:
     {total_size}""")
+    os.chdir("..")
+    logcsv.write(logTableData + "\n")
+    run = not(run)
