@@ -38,19 +38,45 @@ logcsv.write(f"""Number,"Fur Colour","Spot Colour","Eye Colour",glassesTrue,Glas
 
 #-- Generate random colour --
 
-def colourGen(darkerTrue=None):
+def colourGen(darkerTrue=None,hex_=None):
     colour = ""
     r = random.randint(55,200)
     g = random.randint(55,200)
     b = random.randint(55,200)
+    if darkerTrue and hex_ == None:
+        colour = f"rgb({r},{g},{b})"
+    
+    if hex_:
+        r = hex(int(r))
+        g = hex(int(g))
+        b = hex(int(b))
+        str(r).replace("0x", "")
+        str(g).replace("0x", "")
+        str(b).replace("0x", "")
+        colour = f"#{str(r)}{str(g)}{str(b)}"
+
     if darkerTrue:
         r = r * 0.25
         g = g * 0.25
         b = b * 0.25
-
-    colour = f"rgb({r},{g},{b})"
+        colour = f"rgb({r},{g},{b})"
 
     return colour
+
+def invertHex(hex_):
+    if hex_[0] == "#":
+        hex_.replace(hex_[0],"")
+    int(hex_,base=16) ** 255
+
+
+"""def invertColor(hex_):
+    hex_ = hex_[1,len(hex_)]
+    #invert color components
+    r = str(255 - int(hex_[0, 2]))
+    g = str(255 - int(hex_[2, 4]))
+    b = str(255 - int(hex_[4, 6]))
+    #pad each with zeros and return
+    return '#' + '{:01}'.format(r) + '{:01}'.format(g) + '{:01}'.format(b)"""
 
 ###########################################################################################
 
@@ -92,7 +118,7 @@ while run:
 
         #-- Background --
 
-        backgroundColour = colourGen()
+        backgroundColour = colourGen(hex_=True)
 
         background = f"""<!-- Background -->
         <path d="M 0 0 L 1600 0 L 1600 1600 L 0 1600 Z"
@@ -197,6 +223,9 @@ while run:
         else:
             glassesTrue = False
             glassesFill = None
+
+        textColour = invertHex(backgroundColour)
+        text = f"""<text style="vertical-align:top; text-align:right fill={textColour}; font-size=10px">{filename}</text>"""
 
         #-- File Writing + Finalising --
 
