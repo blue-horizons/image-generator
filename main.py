@@ -45,7 +45,7 @@ def colourGen(darkerTrue=None,hex_=None):
     b = random.randint(55,200)
     if darkerTrue and hex_ == None:
         colour = f"rgb({r},{g},{b})"
-    
+    """ 
     if hex_:
         r = hex(int(r))
         g = hex(int(g))
@@ -54,7 +54,7 @@ def colourGen(darkerTrue=None,hex_=None):
         str(g).replace("0x", "")
         str(b).replace("0x", "")
         colour = f"#{str(r)}{str(g)}{str(b)}"
-
+""" 
     if darkerTrue:
         r = r * 0.25
         g = g * 0.25
@@ -62,11 +62,14 @@ def colourGen(darkerTrue=None,hex_=None):
         colour = f"rgb({r},{g},{b})"
 
     return colour
-
+""" 
 def invertHex(hex_):
     if hex_[0] == "#":
         hex_.replace(hex_[0],"")
-    int(hex_,base=16) ** 255
+    int(hex_) ** 255
+    str(r).replace("0x", "")
+    str(g).replace("0x", "")
+    str(b).replace("0x", "") """   
 
 
 """def invertColor(hex_):
@@ -224,8 +227,10 @@ while run:
             glassesTrue = False
             glassesFill = None
 
-        textColour = invertHex(backgroundColour)
-        text = f"""<text style="vertical-align:top; text-align:right fill={textColour}; font-size=10px">{filename}</text>"""
+        
+        textColour = ["aliceblue","antiqueWhite","cadetblue","darkolivegreen","darkseagreen","darkslategrey","darkmagenta","darkred","goldenrod","hotpink"]
+        textFill = textColour[random.randint(0,9)]
+        text = f"""<text style="vertical-align:top; text-align:right fill={textFill}; font-size=10px">{filename}</text>"""
 
         #-- File Writing + Finalising --
 
