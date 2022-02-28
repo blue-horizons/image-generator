@@ -8,7 +8,7 @@ import time
 from datetime import date, datetime
 
 from cairosvg import svg2png  # CairoSvg - converts `.svg` to `.png`
-from simple_chalk import blue, green, yellow, black, red
+from simple_chalk import black, blue, green, red, yellow
 
 darkred = black.bgRed
 total_size = 0
@@ -38,12 +38,12 @@ logcsv.write(f"""Number,"Fur Colour","Spot Colour","Eye Colour",glassesTrue,Glas
 
 #-- Generate random colour --
 
-def colourGen(darkerTrue=None,hex_=None):
+def colourGen(darkerTrue=None): #,hex_=None
     colour = ""
     r = random.randint(55,200)
     g = random.randint(55,200)
     b = random.randint(55,200)
-    if darkerTrue and hex_ == None:
+    if darkerTrue == None:#and hex_ == 
         colour = f"rgb({r},{g},{b})"
     """ 
     if hex_:
@@ -62,6 +62,19 @@ def colourGen(darkerTrue=None,hex_=None):
         colour = f"rgb({r},{g},{b})"
 
     return colour
+
+
+def createElem(path,name,colour=None,strokeColour="Black",strokeWeight=LINE_WEIGHT,DarkerTrue=None,text=""):
+    elementColour = colourGen(DarkerTrue)
+    if text != "":
+        end = f">{text}</path>"
+    else:
+        end = "/>"
+    element = f"""<!-- {name} -->
+        <path d="{path}"
+        fill="{elementColour}" stroke="{strokeColour}" stroke-width="{strokeColour}" {end}"""
+    return element
+
 """ 
 def invertHex(hex_):
     if hex_[0] == "#":
@@ -121,7 +134,7 @@ while run:
 
         #-- Background --
 
-        backgroundColour = colourGen(hex_=True)
+        backgroundColour = colourGen()
 
         background = f"""<!-- Background -->
         <path d="M 0 0 L 1600 0 L 1600 1600 L 0 1600 Z"
@@ -231,6 +244,10 @@ while run:
         textColour = ["aliceblue","antiqueWhite","cadetblue","darkolivegreen","darkseagreen","darkslategrey","darkmagenta","darkred","goldenrod","hotpink"]
         textFill = textColour[random.randint(0,9)]
         text = f"""<text style="vertical-align:top; text-align:right fill={textFill}; font-size=10px">{filename}</text>"""
+
+        svgOut = svgOut + createElem("""M 500 245 C 498 241 490 241 485 245 C 482 243 490 229 494 232 C 480 226 471 217 460 244 L 460 300 Z 
+        M 340 245 C 328 250 332 234 300 243 C 311 234 296 221 318 210 C 274 227 270 235 259 257 C 236 290 193 214 225 329 C 210.3333 331.3333 199 381 173 302 C 161.3333 338 149.6667 374 204 469 C 190 488 185 523 141 466 C 169 547 128 537 206 634 C 184.3333 649.3333 162.6667 664.6667 127 618 C 147 679 126 717 227 757 C 210 785 201 828 133 798 C 143 844 180 885 216 918 C 191 907 159 933 127 895 C 150.6667 931.3333 132 970 198 1004 C 183 1014 197 1084 132 1007 C 137 1042 152 1079 173 1100 L 300 1100 L 300 300 Z 
+        M 760 300 C 796 262 735 255 777 219 C 720 230 703 213 648 239 C 659 221 647 228 676 203 C 649 207 630 222 620 240 L 620 300 Z""", "Mane", DarkerTrue=True)
 
         #-- File Writing + Finalising --
 
