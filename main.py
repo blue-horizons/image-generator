@@ -8,7 +8,8 @@ import time
 from datetime import date, datetime
 
 from cairosvg import svg2png  # CairoSvg - converts `.svg` to `.png`
-from simple_chalk import black, blue, green, red, yellow
+from simple_chalk import black, blue, green, red, yellow # Colours terminal text
+from PIL.PngImagePlugin import PngImageFile, PngInfo
 
 darkred = black.bgRed
 total_size = 0
@@ -33,8 +34,6 @@ logTableData = ""
 
 logcsv = open("log.csv","a")
 logcsv.write(f"""Number,"Fur Colour","Spot Colour","Eye Colour",glassesTrue,Glasses Colour,Date Made,Time Made\n""")
-
-
 
 #-- Generate random colour --
 
@@ -65,6 +64,7 @@ def colourGen(darkerTrue=None): #,hex_=None
 
 
 def createElem(path,name,colour=None,strokeColour="Black",strokeWeight=LINE_WEIGHT,DarkerTrue=None,text=""):
+    
     elementColour = colourGen(DarkerTrue)
     if text != "":
         end = f">{text}</path>"
@@ -124,6 +124,12 @@ while run:
         filename = f"hawsie #{formatNum}" # Sets filename
         print(yellow(f"Creating `{filename}`...")) # Returns Filename
 
+        global targetImage
+        targetImage = PngImageFile(f"{filename}.png")
+
+        metadata = PngInfo()
+        metadata.add_text("File", f"{filename}")
+
         #-- Set xml version/ encoding etc
         svgOut = f"""<?xml version="1.0" encoding="UTF-8" standalone="no"?>
         <!-- 
@@ -135,6 +141,8 @@ while run:
         #-- Background --
 
         backgroundColour = colourGen()
+
+        createElem(path, name)
 
         background = f"""<!-- Background -->
         <path d="M 0 0 L 1600 0 L 1600 1600 L 0 1600 Z"
@@ -148,7 +156,7 @@ while run:
 
         face = f"""
         <!-- Face -->
-        <path d="M 300 300 L 380 80 L 460 300 L 540 80 L 620 300 L 1220 300 C 1260 300 1300 340 1300 380 L 1300 780 L 780 780 C 760 780 740 800 740 820 L 740 1160 C 740 1180 760 1200 780 1200 L 1300 1200 C 1300 1260 1260 1300 1200 1300 L 400 1300 C 340 1300 300 1260 300 1200 Z" 
+        <path d="M 300 300 L 460 80 L 460 300 L 620 80 L 620 300 L 1220 300 C 1260 300 1300 340 1300 380 L 1300 780 L 780 780 C 760 780 740 800 740 820 L 740 1160 C 740 1180 760 1200 780 1200 L 1300 1200 C 1300 1260 1260 1300 1200 1300 L 400 1300 C 340 1300 300 1260 300 1200 Z" 
         fill="{furColour}" stroke="black" stroke-width="{LINE_WEIGHT}" />"""
         
         svgOut = svgOut + face
@@ -172,7 +180,7 @@ while run:
         #-- Ears --
 
         ears = f"""<!-- Ears -->
-        <path d="M 320 300 L 380 140 L 440 300 Z M 480 300 L 540 140 L 600 300 Z"
+        <path d="M 320 300 L 440 140 L 440 300 Z M 480 300 L 600 140 L 600 300 Z"
         fill="#ffbec1" stroke="black" stroke-width="{LINE_WEIGHT}" />"""
 
         svgOut = svgOut + ears
@@ -247,7 +255,7 @@ while run:
 
         svgOut = svgOut + createElem("""M 500 245 C 498 241 490 241 485 245 C 482 243 490 229 494 232 C 480 226 471 217 460 244 L 460 300 Z 
         M 340 245 C 328 250 332 234 300 243 C 311 234 296 221 318 210 C 274 227 270 235 259 257 C 236 290 193 214 225 329 C 210.3333 331.3333 199 381 173 302 C 161.3333 338 149.6667 374 204 469 C 190 488 185 523 141 466 C 169 547 128 537 206 634 C 184.3333 649.3333 162.6667 664.6667 127 618 C 147 679 126 717 227 757 C 210 785 201 828 133 798 C 143 844 180 885 216 918 C 191 907 159 933 127 895 C 150.6667 931.3333 132 970 198 1004 C 183 1014 197 1084 132 1007 C 137 1042 152 1079 173 1100 L 300 1100 L 300 300 Z 
-        M 760 300 C 796 262 735 255 777 219 C 720 230 703 213 648 239 C 659 221 647 228 676 203 C 649 207 630 222 620 240 L 620 300 Z""", "Mane", DarkerTrue=True)
+        M 760 300 C 796 262 735 255 777 219 C 720 230 703 213 648 239 C 659 221 647 228 676 203 C 649 207 630 222 620 240 L 620 300 Z""", "Mane", DarkerTrue=True, strokeColour="Black")
 
         #-- File Writing + Finalising --
 
@@ -284,6 +292,11 @@ while run:
             
             "")
             os.chdir("HAWSIES")"""
+
+        targetImage.save("NewPath.png", pnginfo=metadata)
+        targetImage = PngImageFile(f"{filename}.png")
+
+        print(targetImage.text)
 
         print(f"`{green(filename)}.png` created in {blue(round(subTimerEnd - subTimer, 4))} s")
         
