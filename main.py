@@ -9,8 +9,8 @@ from datetime import date, datetime
 
 from cairosvg import svg2png  # CairoSvg - converts `.svg` to `.png`
 from PIL.PngImagePlugin import PngImageFile, PngInfo
-from simple_chalk import (black, blue, green, red,  # Colours terminal text
-                          yellow)
+from simple_chalk import (black, blue, blueBright,  # Colours terminal text
+                          green, red, yellow)
 
 darkred = black.bgRed
 total_size = 0
@@ -25,7 +25,7 @@ else:
 count = 0
 
 LINE_WEIGHT = 10
-
+TEMP_SVG =""
 TODAY = date.today()
 TODAY = TODAY.strftime("%d-%m-%Y")
 
@@ -125,11 +125,11 @@ while run:
         filename = f"hawsie #{formatNum}" # Sets filename
         print(yellow(f"Creating `{filename}`...")) # Returns Filename
 
-        global targetImage
-        targetImage = PngImageFile(f"{filename}.png")
+        # global targetImage
+        # targetImage = PngImageFile(f"{filename}.png")
 
-        metadata = PngInfo()
-        metadata.add_text("File", f"{filename}")
+        # metadata = PngInfo()
+        # metadata.add_text("File", f"{filename}")
 
         #-- Set xml version/ encoding etc
         svgOut = f"""<?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -143,13 +143,13 @@ while run:
 
         backgroundColour = colourGen()
 
-        createElem("M 0 0 L 1600 0 L 1600 1600 L 0 1600 Z", "Background", )
+        # createElem("M 0 0 L 1600 0 L 1600 1600 L 0 1600 Z", "Background", )
 
-        # background = f"""<!-- Background -->
-        # <path d="M 0 0 L 1600 0 L 1600 1600 L 0 1600 Z"
-        # fill="{backgroundColour}" stroke="Black" stroke-width="0px"/>"""
+        background = f"""<!-- Background -->
+        <path d="M 0 0 L 1600 0 L 1600 1600 L 0 1600 Z"
+        fill="{backgroundColour}" stroke="Black" stroke-width="0px"/>"""
         
-        # svgOut = svgOut + background
+        svgOut = svgOut + background
 
         #-- Face --
 
@@ -271,13 +271,14 @@ while run:
                 g.close()
             print(f"`{filename}.svg` created also.")"""
         total_size = int(os.path.getsize(f"{filename}.png"))
-        if count == 1:
-            with open("hawsie_template.svg","w") as f:
-                f.write(svgOut)
-            svg2png(bytestring=svgOut,write_to="hawsie_template.png")
-
-
+        
         subTimerEnd = time.time()
+
+        if count == 1:
+            # with open("hawsie_template.svg","w") as f:
+            #     f.write(svgOut)
+            svgOut = TEMP_SVG
+            
 
         logTableData += f"""{formatNum},"{furColour}","{spotsFill}","{eyeColour}",{bool(glassesTrue)},{glassesFill},{TODAY},{time.time()}\n"""
 
@@ -294,10 +295,10 @@ while run:
             "")
             os.chdir("HAWSIES")"""
 
-        targetImage.save("NewPath.png", pnginfo=metadata)
-        targetImage = PngImageFile(f"{filename}.png")
+        # targetImage.save("NewPath.png", pnginfo=metadata)
+        # targetImage = PngImageFile(f"{filename}.png")
 
-        print(targetImage.text)
+        # print(targetImage.text)
 
         print(f"`{green(filename)}.png` created in {blue(round(subTimerEnd - subTimer, 4))} s")
         
@@ -317,6 +318,14 @@ Avg. time taken per image: ~ {blue(round(timer/1000,4))} s
 
 Total file size: {red(total_size)} bytes""")
     os.chdir("..")
+    os.chdir("..")
+
+    svg2png(bytestring=TEMP_SVG,write_to="hawsie_template.png")
+
+    with open("temp.svg","w") as f:
+        f.write(TEMP_SVG)
+
+
     logcsv.write(logTableData + "\n")
-    print(darkred("log table written"))
+    print(blueBright("log table written"))
     run = not(run)

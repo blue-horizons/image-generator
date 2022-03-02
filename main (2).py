@@ -76,9 +76,7 @@ def createElem(path,name,colour=None,strokeColour="Black",strokeWeight=LINE_WEIG
         <path d="{path}"
         fill="{elementColour}" stroke="{strokeColour}" stroke-width="{strokeColour}" {end}"""
     
-    metadata.add_text(f"{name}:True - {elementColour}")
-
-    csvHeads = csvHeads + name
+    #metadata.add_text(name,f"{name}:True - {elementColour}")
     
 
     return element
@@ -246,8 +244,8 @@ while run:
             "")
             os.chdir("HAWSIES")"""
 
-        targetImage.save(f"{filename}.png", pnginfo=metadata)
-        targetImage = PngImageFile(f"{filename}.png")
+        # targetImage.save(f"{filename}.png", pnginfo=metadata)
+        # targetImage = PngImageFile(f"{filename}.png")
 
         # print(targetImage.text)
 
