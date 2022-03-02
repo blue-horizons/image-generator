@@ -317,13 +317,12 @@ Time Taken to make {count} images: {blue(round(timer, 4))} s
 Avg. time taken per image: ~ {blue(round(timer/1000,4))} s
 
 Total file size: {red(total_size)} bytes""")
-    os.chdir("..")
-    os.chdir("..")
+    
 
-    svg2png(bytestring=TEMP_SVG,write_to="hawsie_template.png")
+    # svg2png(bytestring=TEMP_SVG,write_to="hawsie_template.png")
 
-    with open("temp.svg","w") as f:
-        f.write(TEMP_SVG)
+    # with open("temp.svg","w") as f:
+    #     f.write(TEMP_SVG)
 
 
     logcsv.write(logTableData + "\n")
