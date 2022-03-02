@@ -8,10 +8,11 @@ import time
 from datetime import date, datetime
 
 from cairosvg import svg2png  # CairoSvg - converts `.svg` to `.png`
-from simple_chalk import black, blue, green, red, yellow # Colours terminal text
 from PIL.PngImagePlugin import PngImageFile, PngInfo
+from simple_chalk import (black, blue, green, red,  # Colours terminal text
+                          yellow)
 
-darkred = black.bgRed
+DARKRED = black.bgRed
 total_size = 0
 #-- Makes directory `HAWSIES` if not exists --
 if os.path.isdir("HAWSIES"):
@@ -34,6 +35,7 @@ logTableData = ""
 
 global elementColour
 global filename
+global csvOut
 
 #-- open log csv --
 
@@ -63,7 +65,7 @@ def colourGen(darkerTrue=None): #,hex_=None
 def createElem(path,name,colour=None,strokeColour="Black",strokeWeight=LINE_WEIGHT,DarkerTrue=None,text="",fillColour=None):
     
     if colour != None:
-        colour = elementColour
+        elementColour = colour
     else:
         elementColour=colourGen(DarkerTrue)
     if text != "":
@@ -73,6 +75,12 @@ def createElem(path,name,colour=None,strokeColour="Black",strokeWeight=LINE_WEIG
     element = f"""<!-- {name} -->
         <path d="{path}"
         fill="{elementColour}" stroke="{strokeColour}" stroke-width="{strokeColour}" {end}"""
+    
+    metadata.add_text(f"{name}:True - {elementColour}")
+
+    csvHeads = csvHeads + name
+    
+
     return element
 
 #-- Main Program --
@@ -115,61 +123,24 @@ while run:
     """
         #-- Background --
 
-        # backgroundColour = colourGen()
-
         createElem("M 0 0 L 1600 0 L 1600 1600 L 0 1600 Z", "Background", strokeWeight="0px")
 
-        # background = f"""<!-- Background -->
-        # <path d="M 0 0 L 1600 0 L 1600 1600 L 0 1600 Z"
-        # fill="{backgroundColour}" stroke="Black" stroke-width="0px"/>"""
-        
-        #svgOut = svgOut + background
-####################################
         #-- Face --
 
-        # furColour = colourGen()
-
         furColour = colourGen()
-
         createElem("M 300 300 L 460 80 L 460 300 L 620 80 L 620 300 L 1220 300 C 1260 300 1300 340 1300 380 L 1300 780 L 780 780 C 760 780 740 800 740 820 L 740 1160 C 740 1180 760 1200 780 1200 L 1300 1200 C 1300 1260 1260 1300 1200 1300 L 400 1300 C 340 1300 300 1260 300 1200 Z", "Face",colour=furColour)
 
-        # face = f"""
-        # <!-- Face -->
-        # <path d="M 300 300 L 460 80 L 460 300 L 620 80 L 620 300 L 1220 300 C 1260 300 1300 340 1300 380 L 1300 780 L 780 780 C 760 780 740 800 740 820 L 740 1160 C 740 1180 760 1200 780 1200 L 1300 1200 C 1300 1260 1260 1300 1200 1300 L 400 1300 C 340 1300 300 1260 300 1200 Z" 
-        # fill="{furColour}" stroke="black" stroke-width="{LINE_WEIGHT}" />"""
-        
-        # svgOut = svgOut + face
-        
         #-- Body --
 
         createElem("M 300 1100 L -20 1100 L -20 1620 L 540 1620 L 540 1300 L 400 1300 C 340 1300 300 1260 300 1200 Z", "Body",colour=furColour)
-
-        # body = f"""
-        # <!-- Body -->
-        # <path d="M 300 1100 L -20 1100 L -20 1620 L 540 1620 L 540 1300 L 400 1300 C 340 1300 300 1260 300 1200 Z" 
-        # fill="{furColour}" stroke="black" stroke-width="{LINE_WEIGHT}" />"""
-
-        # svgOut = svgOut + body
         
         #-- Teeth --
 
         createElem("M 1295 780 C 1295 825 1220 825 1220 780 C 1220 825 1145 825 1145 780 C 1145 825 1070 825 1070 780 C 1070 825 995 825 995 780 C 995 825 920 825 920 780 C 920 825 845 825 845 780 Z M 1295 1200 C 1295 1155 1220 1155 1220 1200 C 1220 1155 1135 1155 1135 1200 C 1135 1155 1060 1155 1060 1200 C 1060 1155 985 1155 985 1200 C 985 1155 910 1155 910 1200 C 910 1155 835 1155 835 1200 Z", "teeth", colour="white")
 
-        # teeth = f"""<!-- Teeth -->
-        # <path d="M 1295 780 C 1295 825 1220 825 1220 780 C 1220 825 1145 825 1145 780 C 1145 825 1070 825 1070 780 C 1070 825 995 825 995 780 C 995 825 920 825 920 780 C 920 825 845 825 845 780 Z M 1295 1200 C 1295 1155 1220 1155 1220 1200 C 1220 1155 1135 1155 1135 1200 C 1135 1155 1060 1155 1060 1200 C 1060 1155 985 1155 985 1200 C 985 1155 910 1155 910 1200 C 910 1155 835 1155 835 1200 Z"
-        # fill="white" stroke="black" stroke-width="{LINE_WEIGHT}"/>"""
-        
-        # svgOut = svgOut + teeth
-
         #-- Ears --
 
         createElem("M 320 300 L 440 140 L 440 300 Z M 480 300 L 600 140 L 600 300 Z", "Ears", colour="#ffbec1")
-
-        # ears = f"""<!-- Ears -->
-        # <path d="M 320 300 L 440 140 L 440 300 Z M 480 300 L 600 140 L 600 300 Z"
-        # fill="#ffbec1" stroke="black" stroke-width="{LINE_WEIGHT}" />"""
-
-        # svgOut = svgOut + ears
 
         #-- Face Spots --
 
@@ -177,11 +148,7 @@ while run:
         spotsFill = colourGen(True)
         if randomiser % 2 == 0:
             spotsTrue = True
-        #     spots = f"""
-        #     <!-- Spots -->
-        # <path d="M 300 840 C 500 840 700 1160 600 1300 L 400 1300 C 340 1300 300 1260 300 1200 M 860 300 C 700 460 1260 640 1140 300 Z"
-        # fill="{spotsFill}" stroke="black" stroke-width="{LINE_WEIGHT}" />"""
-        #     svgOut = svgOut + spots
+            createElem("M 300 840 C 500 840 700 1160 600 1300 L 400 1300 C 340 1300 300 1260 300 1200 M 860 300 C 700 460 1260 640 1140 300 Z","spots")
         else:
             None
 
@@ -222,7 +189,7 @@ while run:
             glassesTrue = True
             glassesFill=random.randint(0,9)
             
-            glassesColours = ["aliceblue","antiqueWhite","cadetblue","darkolivegreen","darkseagreen","darkslategrey","darkmagenta","darkred","goldenrod","hotpink"]
+            glassesColours = ["aliceblue","antiqueWhite","cadetblue","darkolivegreen","darkseagreen","darkslategrey","darkmagenta","DARKRED","goldenrod","hotpink"]
             glassesFill = glassesColours[glassesFill]
             glasses = f"""<!-- Glasses -->
             <path d="M 295 400 L 715 400 L 715 520 C 715 620 540 620 540 530 C 540 640 365 620 365 520 L 365 420 L 295 420 L 295 420 L 295 400 M 385 420 L 385 520 C 385 600 530 610 530 510 L 530 420 Z M 550 420 C 550 450 550 480 550 510 C 550 610 695 610 695 510 L 695 420 Z"
@@ -235,7 +202,7 @@ while run:
             glassesFill = None
 
         
-        textColour = ["aliceblue","antiqueWhite","cadetblue","darkolivegreen","darkseagreen","darkslategrey","darkmagenta","darkred","goldenrod","hotpink"]
+        textColour = ["aliceblue","antiqueWhite","cadetblue","darkolivegreen","darkseagreen","darkslategrey","darkmagenta","DARKRED","goldenrod","hotpink"]
         textFill = textColour[random.randint(0,9)]
         text = f"""<text style="vertical-align:top; text-align:right fill={textFill}; font-size=10px">{filename}</text>"""
 
@@ -304,4 +271,4 @@ Total file size: {red(total_size)} bytes""")
     run = not(run)
 os.chdir("..")
 logcsv.write(logTableData + "\n")
-print(darkred("log table written"))
+print(DARKRED("log table written"))

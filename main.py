@@ -8,8 +8,9 @@ import time
 from datetime import date, datetime
 
 from cairosvg import svg2png  # CairoSvg - converts `.svg` to `.png`
-from simple_chalk import black, blue, green, red, yellow # Colours terminal text
 from PIL.PngImagePlugin import PngImageFile, PngInfo
+from simple_chalk import (black, blue, green, red,  # Colours terminal text
+                          yellow)
 
 darkred = black.bgRed
 total_size = 0
@@ -142,13 +143,13 @@ while run:
 
         backgroundColour = colourGen()
 
-        createElem(path, name)
+        createElem("M 0 0 L 1600 0 L 1600 1600 L 0 1600 Z", "Background", )
 
-        background = f"""<!-- Background -->
-        <path d="M 0 0 L 1600 0 L 1600 1600 L 0 1600 Z"
-        fill="{backgroundColour}" stroke="Black" stroke-width="0px"/>"""
+        # background = f"""<!-- Background -->
+        # <path d="M 0 0 L 1600 0 L 1600 1600 L 0 1600 Z"
+        # fill="{backgroundColour}" stroke="Black" stroke-width="0px"/>"""
         
-        svgOut = svgOut + background
+        # svgOut = svgOut + background
 
         #-- Face --
 
