@@ -301,6 +301,17 @@ while run:
         # print(targetImage.text)
 
         print(f"`{green(filename)}.png` created in {blue(round(subTimerEnd - subTimer, 4))} s")
+
+        import base64
+import requests
+
+with open(f"{filename}.png", "rb") as file:
+    url = "https://api.imgbb.com/1/upload"
+    payload = {
+        "key": key_imgbb,
+        "image": base64.b64encode(file.read()),
+    }
+    res = requests.post(url, payload)
         
         
     """os.replace("/HAWSIES/hawsieLog.txt", f"hawsieLog_{TODAY}.txt")"""
