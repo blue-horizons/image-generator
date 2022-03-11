@@ -202,3 +202,22 @@ Number,"Fur Colour","Spot Colour","Eye Colour",glassesTrue,Glasses Colour,Date M
 098,"rgb(57,99,130)","rgb(45.0,42.0,14.25)","rgb(118,57,80)",False,None,06-03-2022,1646565832.2360473
 099,"rgb(173,167,86)","rgb(39.75,19.5,46.25)","rgb(56,123,142)",False,None,06-03-2022,1646565832.358929
 
+Number,"Fur Colour","Spot Colour","Eye Colour",glassesTrue,Glasses Colour,Date Made,Time Made
+Number,"Fur Colour","Spot Colour","Eye Colour",glassesTrue,Glasses Colour,Date Made,Time Made
+000,"rgb(107,124,110)","rgb(43.25,21.0,37.0)","rgb(186,116,199)",False,None,08-03-2022,1646736131.8554034
+
+Number,"Fur Colour","Spot Colour","Eye Colour",glassesTrue,Glasses Colour,Date Made,Time Made
+000,"rgb(120,125,106)","rgb(43.0,47.5,43.75)","rgb(154,92,56)",False,None,08-03-2022,1646736156.2730832
+
+Number,"Fur Colour","Spot Colour","Eye Colour",glassesTrue,Glasses Colour,Date Made,Time Made
+000,"rgb(66,181,119)","rgb(28.25,26.5,25.75)","rgb(85,75,132)",False,None,08-03-2022,1646736465.2726235
+001,"rgb(103,110,137)","rgb(50.0,17.5,38.0)","rgb(191,102,144)",False,None,08-03-2022,1646736466.1310785
+002,"rgb(197,94,194)","rgb(47.5,19.75,20.25)","rgb(124,197,165)",True,darkolivegreen,08-03-2022,1646736467.0533867
+003,"rgb(181,74,176)","rgb(26.75,17.0,37.75)","rgb(153,82,180)",False,None,08-03-2022,1646736467.9246657
+004,"rgb(185,89,185)","rgb(47.25,14.0,21.0)","rgb(138,160,63)",False,None,08-03-2022,1646736468.8005524
+005,"rgb(106,179,71)","rgb(23.0,35.5,49.5)","rgb(89,149,130)",False,None,08-03-2022,1646736469.6022732
+006,"rgb(78,107,180)","rgb(21.25,19.5,15.25)","rgb(159,169,114)",True,darkseagreen,08-03-2022,1646736470.4275446
+007,"rgb(73,102,156)","rgb(29.0,27.75,48.75)","rgb(108,200,74)",False,None,08-03-2022,1646736471.3236823
+008,"rgb(200,115,70)","rgb(13.75,42.25,15.75)","rgb(73,148,177)",False,None,08-03-2022,1646736472.1049376
+009,"rgb(69,78,97)","rgb(44.5,31.75,23.25)","rgb(166,107,181)",False,None,08-03-2022,1646736472.908863
+

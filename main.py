@@ -1,4 +1,5 @@
 #-- Imports --
+import base64
 import csv
 import math
 import os
@@ -7,6 +8,7 @@ import sys
 import time
 from datetime import date, datetime
 
+import requests
 from cairosvg import svg2png  # CairoSvg - converts `.svg` to `.png`
 from PIL.PngImagePlugin import PngImageFile, PngInfo
 from simple_chalk import (black, blue, blueBright,  # Colours terminal text
@@ -302,16 +304,15 @@ while run:
 
         print(f"`{green(filename)}.png` created in {blue(round(subTimerEnd - subTimer, 4))} s")
 
-        import base64
-import requests
 
-with open(f"{filename}.png", "rb") as file:
-    url = "https://api.imgbb.com/1/upload"
-    payload = {
-        "key": key_imgbb,
-        "image": base64.b64encode(file.read()),
-    }
-    res = requests.post(url, payload)
+        with open(f"{filename}.png", "rb") as file:
+            url = "https://api.imgbb.com/1/upload"
+            payload = {
+                "key": "02d0dcd27fdef5a9f31c250046ba59f8",
+                "image": base64.b64encode(file.read()),
+            }
+        res = requests.post(url, payload)
+
         
         
     """os.replace("/HAWSIES/hawsieLog.txt", f"hawsieLog_{TODAY}.txt")"""
@@ -327,7 +328,10 @@ Time Taken to make {count} images: {blue(round(timer, 4))} s
 ----------------------------------------
 Avg. time taken per image: ~ {blue(round(timer/1000,4))} s
 
-Total file size: {red(total_size)} bytes""")
+Total file size: {red(total_size)} bytes
+
+
+{res}""")
     
 
     # svg2png(bytestring=TEMP_SVG,write_to="hawsie_template.png")
